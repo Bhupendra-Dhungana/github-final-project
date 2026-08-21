@@ -1,34 +1,40 @@
-# index.html — Travel Recommendation Website
+# Complete index.html — Travel Recommendation Website
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Travel Recommendation</title>
 
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, sans-serif;
-            background: #f4f8fb;
+            background-color: #f4f8fb;
             color: #333;
         }
 
-        /* Navigation Bar */
+        /* =========================
+           Navigation Bar
+        ========================= */
+
         .navbar {
-            background: #1b4965;
-            padding: 15px 30px;
+            background-color: #1b4965;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 15px 30px;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
@@ -53,20 +59,26 @@
             text-decoration: underline;
         }
 
-        /* Search Area */
+        /* =========================
+           Search Bar
+        ========================= */
+
         .search-container {
             display: flex;
             gap: 8px;
+            align-items: center;
         }
 
-        .search-container input {
+        #searchInput {
+            width: 230px;
             padding: 10px;
-            width: 220px;
             border: none;
             border-radius: 5px;
+            font-size: 14px;
         }
 
-        button {
+        .search-btn,
+        .clear-btn {
             padding: 10px 15px;
             border: none;
             border-radius: 5px;
@@ -75,54 +87,67 @@
         }
 
         .search-btn {
-            background: #62b6cb;
+            background-color: #62b6cb;
             color: white;
         }
 
         .clear-btn {
-            background: #eeeeee;
+            background-color: white;
             color: #333;
         }
 
-        /* Home Section */
+        .search-btn:hover,
+        .clear-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* =========================
+           Home Section
+        ========================= */
+
         .hero {
             text-align: center;
-            padding: 60px 20px 30px;
+            padding: 70px 20px 40px;
         }
 
         .hero h1 {
+            font-size: 42px;
             color: #1b4965;
-            font-size: 40px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .hero p {
+            max-width: 750px;
+            margin: 0 auto;
             font-size: 18px;
-            max-width: 700px;
-            margin: auto;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* Recommendation Results */
+        /* =========================
+           Recommendation Results
+        ========================= */
+
         #recommendations {
             max-width: 1100px;
-            margin: 30px auto;
+            margin: 20px auto 50px;
             padding: 20px;
+
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
         }
 
         .card {
-            background: white;
+            background-color: white;
             border-radius: 10px;
             overflow: hidden;
+
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .card img {
             width: 100%;
-            height: 220px;
+            height: 230px;
             object-fit: cover;
         }
 
@@ -130,26 +155,112 @@
             padding: 20px;
         }
 
-        .card h2 {
+        .card-content h2 {
             color: #1b4965;
             margin-bottom: 10px;
         }
 
-        .card p {
-            line-height: 1.5;
+        .card-content p {
+            line-height: 1.6;
         }
 
         .message {
+            grid-column: 1 / -1;
             text-align: center;
             padding: 30px;
             font-size: 18px;
         }
 
-        /* Responsive Design */
+        /* =========================
+           About Us
+        ========================= */
+
+        .about {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .about h2 {
+            color: #1b4965;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           Contact Us
+        ========================= */
+
+        .contact {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 40px 20px;
+        }
+
+        .contact h2 {
+            text-align: center;
+            color: #1b4965;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #1b4965;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            background-color: #1b4965;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* =========================
+           Mobile Design
+        ========================= */
+
         @media (max-width: 768px) {
+
             .navbar {
                 flex-direction: column;
-                gap: 15px;
             }
 
             .nav-links {
@@ -158,17 +269,28 @@
             }
 
             .search-container {
-                width: 100%;
-                justify-content: center;
                 flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            #searchInput {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 32px;
             }
         }
     </style>
 </head>
 
+
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- =========================
+         Navigation Bar
+    ========================= -->
+
     <nav class="navbar">
 
         <div class="logo">
@@ -176,12 +298,25 @@
         </div>
 
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+
+            <li>
+                <a href="#home">Home</a>
+            </li>
+
+            <li>
+                <a href="#about">About Us</a>
+            </li>
+
+            <li>
+                <a href="#contact">Contact Us</a>
+            </li>
+
         </ul>
 
+        <!-- Search Bar -->
+
         <div class="search-container">
+
             <input
                 type="text"
                 id="searchInput"
@@ -199,32 +334,155 @@
                 onclick="clearSearch()">
                 Clear
             </button>
+
         </div>
 
     </nav>
 
-    <!-- Home Section -->
-    <section class="hero">
-        <h1>Explore Beautiful Destinations</h1>
+
+    <!-- =========================
+         Home Page
+    ========================= -->
+
+    <section class="hero" id="home">
+
+        <h1>Explore the World</h1>
 
         <p>
             Welcome to our Travel Recommendation website.
-            Search for your favorite destination and discover
-            beautiful places around the world.
+            Discover beautiful destinations, explore amazing
+            beaches, and find the perfect place for your next
+            adventure.
         </p>
+
     </section>
 
-    <!-- Recommendation Results -->
+
+    <!-- =========================
+         Recommendation Results
+    ========================= -->
+
     <div id="recommendations">
+
         <div class="message">
-            Search for a destination to see recommendations.
+            Search for a destination such as "beach" to see
+            travel recommendations.
         </div>
+
     </div>
+
+
+    <!-- =========================
+         About Us
+    ========================= -->
+
+    <section class="about" id="about">
+
+        <h2>About Us</h2>
+
+        <p>
+            We are a travel recommendation website designed
+            to help travelers discover beautiful destinations
+            around the world.
+        </p>
+
+        <p>
+            Our goal is to provide useful travel information
+            and help visitors find destinations that match
+            their interests.
+        </p>
+
+        <h3>Guidance for Team Members</h3>
+
+        <p>
+            Team members should keep destination information
+            accurate and up to date. They should also check
+            images, descriptions, and links regularly to
+            provide visitors with a good travel experience.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         Contact Us
+    ========================= -->
+
+    <section class="contact" id="contact">
+
+        <h2>Contact Us</h2>
+
+        <p>
+            Have a question or need more information?
+            Send us a message.
+        </p>
+
+        <p>
+            Email:
+            travel@example.com
+        </p>
+
+        <form
+            class="contact-form"
+            action="mailto:travel@example.com"
+            method="post"
+            enctype="text/plain">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+            >
+
+            <textarea
+                name="message"
+                placeholder="Your Message"
+                required>
+            </textarea>
+
+            <button type="submit">
+                Send Email
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- =========================
+         Footer
+    ========================= -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 Travel Recommendation.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JavaScript
+    ========================= -->
 
     <script>
 
-        // Travel recommendation data
+        /*
+         * Travel Recommendation Data
+         */
+
         const destinations = [
+
             {
                 name: "Bali Beach",
                 category: "beach",
@@ -238,7 +496,7 @@
                 name: "Maldives Beach",
                 category: "beach",
                 description:
-                    "The Maldives offers stunning white-sand beaches, crystal-clear water, and beautiful tropical islands.",
+                    "The Maldives offers beautiful white-sand beaches, crystal-clear water, tropical islands, and a relaxing atmosphere.",
                 image:
                     "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80"
             },
@@ -247,7 +505,7 @@
                 name: "Paris",
                 category: "city",
                 description:
-                    "Paris is known for its famous landmarks, museums, culture, and romantic atmosphere.",
+                    "Paris is famous for its historic landmarks, museums, art, culture, and beautiful architecture.",
                 image:
                     "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80"
             },
@@ -256,40 +514,63 @@
                 name: "Swiss Alps",
                 category: "mountain",
                 description:
-                    "The Swiss Alps offer spectacular mountains, beautiful landscapes, hiking trails, and winter activities.",
+                    "The Swiss Alps offer beautiful mountain scenery, hiking trails, skiing, and unforgettable landscapes.",
                 image:
                     "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=80"
             }
+
         ];
 
 
-        // Search recommendations
+        /*
+         * Search Function
+         */
+
         function searchRecommendations() {
 
+            const searchInput =
+                document.getElementById("searchInput");
+
             const searchTerm =
-                document.getElementById("searchInput").value
-                .trim()
-                .toLowerCase();
+                searchInput.value.trim().toLowerCase();
 
             const results =
                 document.getElementById("recommendations");
 
             results.innerHTML = "";
 
+
+            /*
+             * Check if search box is empty
+             */
+
             if (searchTerm === "") {
 
                 results.innerHTML =
-                    '<div class="message">Please enter a search term.</div>';
+                    '<div class="message">Please enter a destination to search.</div>';
 
                 return;
             }
 
-            // Search for beach/beaches and other categories
-            const matches = destinations.filter(destination =>
-                destination.name.toLowerCase().includes(searchTerm) ||
-                destination.category.toLowerCase().includes(searchTerm) ||
-                searchTerm.includes(destination.category)
-            );
+
+            /*
+             * Search destinations
+             */
+
+            const matches = destinations.filter(function(destination) {
+
+                return (
+                    destination.name.toLowerCase().includes(searchTerm) ||
+                    destination.category.toLowerCase().includes(searchTerm) ||
+                    searchTerm.includes(destination.category)
+                );
+
+            });
+
+
+            /*
+             * If nothing is found
+             */
 
             if (matches.length === 0) {
 
@@ -299,89 +580,79 @@
                 return;
             }
 
-            matches.forEach(destination => {
 
-                const card = document.createElement("div");
+            /*
+             * Display recommendations
+             */
+
+            matches.forEach(function(destination) {
+
+                const card =
+                    document.createElement("div");
 
                 card.className = "card";
 
                 card.innerHTML = `
+
                     <img
                         src="${destination.image}"
                         alt="${destination.name}"
                     >
 
                     <div class="card-content">
-                        <h2>${destination.name}</h2>
+
+                        <h2>
+                            ${destination.name}
+                        </h2>
 
                         <p>
                             ${destination.description}
                         </p>
+
                     </div>
+
                 `;
 
                 results.appendChild(card);
+
             });
+
         }
 
 
-        // Clear search results
+        /*
+         * Clear Function
+         */
+
         function clearSearch() {
 
             document.getElementById("searchInput").value = "";
 
             document.getElementById("recommendations").innerHTML =
-                '<div class="message">Search for a destination to see recommendations.</div>';
+                '<div class="message">Search for a destination such as "beach" to see travel recommendations.</div>';
+
         }
 
 
-        // Allow pressing Enter to search
-        document.getElementById("searchInput").addEventListener(
-            "keypress",
-            function(event) {
+        /*
+         * Search when pressing Enter
+         */
+
+        document
+            .getElementById("searchInput")
+            .addEventListener("keypress", function(event) {
 
                 if (event.key === "Enter") {
+
                     searchRecommendations();
+
                 }
 
-            }
-        );
+            });
 
     </script>
-const destinations = [
-    {
-        name: "Bali Beach",
-        category: "beach",
-        description: "Beautiful beach with clear blue water and tropical scenery.",
-        image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80"
-    },
 
-    {
-        name: "Maldives Beach",
-        category: "beach",
-        description: "Beautiful white-sand beach with crystal-clear water.",
-        image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80"
-    },
-
-    {
-        name: "Senso-ji Temple",
-        category: "temple",
-        description: "A famous historic Buddhist temple in Tokyo.",
-        image: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=80"
-    },
-
-    {
-        name: "Kiyomizu-dera Temple",
-        category: "temple",
-        description: "A historic Buddhist temple in Kyoto with beautiful views.",
-        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80"
-    }
-];
 </body>
+
 </html>
 ```
-<input type="text" id="searchInput" placeholder="Search for a destination">
-
-<button onclick="searchRecommendations()">Search</button>
-
-<button onclick="clearSearch()">Clear</button>
