@@ -1,453 +1,61 @@
-# index.html — Travel Recommendation Website
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Travel Recommendation</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f8fb;
-            color: #333;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            background: #1b4965;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Search Area */
-        .search-container {
-            display: flex;
-            gap: 8px;
-        }
-
-        .search-container input {
-            padding: 10px;
-            width: 220px;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .search-btn {
-            background: #62b6cb;
-            color: white;
-        }
-
-        .clear-btn {
-            background: #eeeeee;
-            color: #333;
-        }
-
-        /* Home Section */
-        .hero {
-            text-align: center;
-            padding: 60px 20px 30px;
-        }
-
-        .hero h1 {
-            color: #1b4965;
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: auto;
-            line-height: 1.6;
-        }
-
-        /* Recommendation Results */
-        #recommendations {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 20px;
-
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card h2 {
-            color: #1b4965;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            line-height: 1.5;
-        }
-
-        .message {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 30px;
-            font-size: 18px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .search-container {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-        }
-    </style>
-</head>
-
-
-<body>
-
-    <!-- Navigation Bar -->
-
-    <nav class="navbar">
-
-        <div class="logo">
-            Travel Recommendation
-        </div>
-
-        <ul class="nav-links">
-
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-
-            <li>
-                <a href="about.html">About Us</a>
-            </li>
-
-            <li>
-                <a href="contact.html">Contact Us</a>
-            </li>
-
-        </ul>
-
-
-        <!-- Search Box -->
-
-        <div class="search-container">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search for a destination..."
-            >
-
-            <button
-                class="search-btn"
-                onclick="searchRecommendations()">
-                Search
-            </button>
-
-            <button
-                class="clear-btn"
-                onclick="clearSearch()">
-                Clear
-            </button>
-
-        </div>
-
-    </nav>
-
-
-    <!-- Home Section -->
-
-    <section class="hero">
-
-        <h1>
-            Explore Beautiful Destinations
-        </h1>
-
-        <p>
-            Welcome to our Travel Recommendation website.
-            Search for your favorite destination and discover
-            beautiful places around the world.
-        </p>
-
-    </section>
-
-
-    <!-- Recommendation Results -->
-
-    <div id="recommendations">
-
-        <div class="message">
-            Search for a destination to see recommendations.
-        </div>
-
-    </div>
-
-
-    <!-- JavaScript -->
-
-    <script>
-
-        /*
-         * Travel Recommendation Data
-         */
-
-        const destinations = [
-
-            {
-                name: "Bali Beach",
-                category: "beach",
-                description:
-                    "Beautiful beach with clear blue water and tropical scenery.",
-                image:
-                    "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80"
-            },
-
-            {
-                name: "Maldives Beach",
-                category: "beach",
-                description:
-                    "Beautiful white-sand beach with crystal-clear water.",
-                image:
-                    "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80"
-            },
-
-            {
-                name: "Senso-ji Temple",
-                category: "temple",
-                description:
-                    "A famous historic Buddhist temple in Tokyo.",
-                image:
-                    "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=80"
-            },
-
-            {
-                name: "Kiyomizu-dera Temple",
-                category: "temple",
-                description:
-                    "A historic Buddhist temple in Kyoto with beautiful views.",
-                image:
-                    "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80"
-            }
-
-        ];
-
-
-        /*
-         * Search Function
-         */
-
-        function searchRecommendations() {
-
-            const searchTerm =
-                document.getElementById("searchInput")
-                .value
-                .trim()
-                .toLowerCase();
-
-            const results =
-                document.getElementById("recommendations");
-
-            results.innerHTML = "";
-
-
-            /* Empty Search */
-
-            if (searchTerm === "") {
-
-                results.innerHTML =
-                    '<div class="message">Please enter a search term.</div>';
-
-                return;
-            }
-
-
-            /*
-             * Search destinations
-             */
-
-            const matches = destinations.filter(function(destination) {
-
-                return (
-                    destination.name
-                        .toLowerCase()
-                        .includes(searchTerm)
-
-                    ||
-
-                    destination.category
-                        .toLowerCase()
-                        .includes(searchTerm)
-
-                    ||
-
-                    searchTerm.includes(
-                        destination.category.toLowerCase()
-                    )
-                );
-
-            });
-
-
-            /*
-             * No Results
-             */
-
-            if (matches.length === 0) {
-
-                results.innerHTML =
-                    '<div class="message">No recommendations found. Try searching for "beach".</div>';
-
-                return;
-            }
-
-
-            /*
-             * Display Results
-             */
-
-            matches.forEach(function(destination) {
-
-                const card =
-                    document.createElement("div");
-
-                card.className = "card";
-
-
-                card.innerHTML = `
-
-                    <img
-                        src="${destination.image}"
-                        alt="${destination.name}"
-                    >
-
-                    <div class="card-content">
-
-                        <h2>
-                            ${destination.name}
-                        </h2>
-
-                        <p>
-                            ${destination.description}
-                        </p>
-
-                    </div>
-
-                `;
-
-
-                results.appendChild(card);
-
-            });
-
-        }
-
-
-        /*
-         * Clear Search Function
-         */
-
-        function clearSearch() {
-
-            document.getElementById("searchInput").value = "";
-
-            document.getElementById("recommendations").innerHTML =
-                '<div class="message">Search for a destination to see recommendations.</div>';
-
-        }
-
-
-        /*
-         * Press Enter to Search
-         */
-
-        document
-            .getElementById("searchInput")
-            .addEventListener("keypress", function(event) {
-
-                if (event.key === "Enter") {
-
-                    searchRecommendations();
-
-                }
-
-            });
-
-    </script>
-
-</body>
-
-</html>
+# Country Recommendations for Task 8
+
+```javascript
+const destinations = [
+
+    {
+        name: "Japan",
+        category: "country",
+        description:
+            "Japan is a beautiful country known for its traditional culture, modern cities, temples, mountains, and delicious food.",
+        image:
+            "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        name: "France",
+        category: "country",
+        description:
+            "France is a popular travel destination famous for its culture, historic landmarks, beautiful cities, and world-famous cuisine.",
+        image:
+            "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        name: "Bali Beach",
+        category: "beach",
+        description:
+            "Beautiful beach with clear blue water and tropical scenery.",
+        image:
+            "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        name: "Maldives Beach",
+        category: "beach",
+        description:
+            "Beautiful white-sand beach with crystal-clear water.",
+        image:
+            "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        name: "Senso-ji Temple",
+        category: "temple",
+        description:
+            "A famous historic Buddhist temple in Tokyo.",
+        image:
+            "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        name: "Kiyomizu-dera Temple",
+        category: "temple",
+        description:
+            "A historic Buddhist temple in Kyoto with beautiful views.",
+        image:
+            "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80"
+    }
+
+];
 ```
